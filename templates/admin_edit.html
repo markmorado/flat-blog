@@ -1,0 +1,59 @@
+{% extends "themes/clean/base.html" %}
+{% block content %}
+<h1 class="title">{% if mode=='new' %}Новый пост{% else %}Редактирование{% endif %}</h1>
+<form method="post" id="editForm">
+  <div class="grid-2">
+    <div>
+      <label>Заголовок</label>
+      <input class="input" name="title" required value="{{ post.title if post else '' }}">
+    </div>
+    <div>
+      <label>Дата (YYYY-MM-DD)</label>
+      <input class="input" name="date" value="{{ date if date is defined else '' }}">
+    </div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <label>Слаг (опционально)</label>
+      <input class="input" name="slug" placeholder="my-post-slug">
+    </div>
+    <div>
+      <label>Теги (через запятую)</label>
+      <input class="input" name="tags" value="{{ tags if tags is defined else '' }}">
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <label>Текст (Markdown)</label>
+      <textarea class="input" name="body" rows="24" id="mdSrc">{{ body if body is defined else '' }}</textarea>
+    </div>
+    <div>
+      <label>Предпросмотр</label>
+      <div class="card markdown" id="mdOut" style="min-height:300px"></div>
+    </div>
+  </div>
+
+  <p>
+    <button class="btn" type="submit">Сохранить</button>
+    <a class="btn" href="{{ url_for('admin.dashboard') }}">Отмена</a>
+  </p>
+</form>
+
+<!-- Markdown preview via CDN (Marked + highlight.js) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  const src = document.getElementById('mdSrc');
+  const out = document.getElementById('mdOut');
+  function render(){
+    const md = src.value || "";
+    const html = marked.parse(md, { breaks:true, gfm:true });
+    out.innerHTML = html;
+    out.querySelectorAll('pre code').forEach(block => window.hljs?.highlightElement(block));
+  }
+  src.addEventListener('input', render);
+  document.addEventListener('DOMContentLoaded', render);
+</script>
+{% endblock %}

@@ -1,0 +1,17 @@
+services:
+  flatblog:
+    build: .
+    container_name: flatblog-1
+    ports:
+      - "8000:8000"
+    environment:
+      TZ: "Asia/Tashkent"
+      FLASK_SECRET: "${FLASK_SECRET:-development-secret-change-me}"
+      FLATCMS_THEME: "clean"
+      FLATADMIN_USER: "admin"
+      FLATADMIN_PASS: "change_me_strong"
+    volumes:
+      - ./content:/app/content
+      - ./static:/app/static
+      - ./templates:/app/templates
+    restart: unless-stopped

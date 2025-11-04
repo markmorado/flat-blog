@@ -1,0 +1,17 @@
+{% extends "themes/clean/base.html" %}
+{% block content %}
+<nav class="breadcrumbs">
+  <a href="/"><i class="ri-home-4-line"></i> Главная</a> · <span>{{ post.title }}</span>
+</nav>
+
+<article class="post">
+  <h1 class="title">{{ post.title }}</h1>
+  <div class="meta">
+    {% if post.date %}<time datetime="{{ post.date.date() }}"><i class="ri-calendar-line"></i> {{ post.date.date() }}</time>{% endif %}
+    {% if post.tags %}<span class="tags">
+      {% for t in post.tags %}<a class="tag" href="/tag/{{ t }}"><i class="ri-hashtag"></i> {{ t }}</a>{% endfor %}
+    </span>{% endif %}
+  </div>
+  <div class="content markdown">{{ post.html|safe }}</div>
+</article>
+{% endblock %}

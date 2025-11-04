@@ -1,0 +1,20 @@
+{% extends "themes/clean/base.html" %}
+{% block content %}
+<h1 class="title"><i class="ri-search-line"></i> Поиск</h1>
+<form class="search" action="/search" method="get">
+  <input class="input" type="search" name="q" value="{{ q or '' }}" placeholder="Что ищем?">
+  <button class="btn" type="submit">Искать</button>
+</form>
+
+<section class="list">
+  {% for p in posts %}
+  <article class="card">
+    <h2 class="title"><a href="{{ p.url() }}">{{ p.title }}</a></h2>
+    {% if p.date %}<div class="meta"><time datetime="{{ p.date.date() }}"><i class="ri-calendar-line"></i> {{ p.date.date() }}</time></div>{% endif %}
+    <p class="excerpt">{{ p.summary }}</p>
+  </article>
+  {% else %}
+    {% if q %}<p class="muted">Ничего не найдено.</p>{% endif %}
+  {% endfor %}
+</section>
+{% endblock %}

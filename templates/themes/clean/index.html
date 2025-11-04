@@ -1,0 +1,27 @@
+{% extends "themes/clean/base.html" %}
+{% block content %}
+<section class="list">
+  {% for p in posts %}
+  <article class="card">
+    <h2 class="title"><a href="{{ p.url() }}">{{ p.title }}</a></h2>
+    <div class="meta">
+      {% if p.date %}<time datetime="{{ p.date.date() }}"><i class="ri-calendar-line"></i> {{ p.date.date() }}</time>{% endif %}
+      {% if p.tags %}
+        <span class="tags">
+          {% for t in p.tags %}<a class="tag" href="/tag/{{ t }}"><i class="ri-hashtag"></i> {{ t }}</a>{% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <p class="excerpt">{{ p.summary }}</p>
+  </article>
+  {% endfor %}
+</section>
+
+<nav class="pager">
+  {% if page > 1 %}<a class="btn" href="/page/{{ page - 1 }}"><i class="ri-arrow-left-line"></i> Назад</a>{% endif %}
+  {% for i in range(1, pages+1) %}
+    {% if i == page %}<span class="num active">{{ i }}</span>{% else %}<a class="num" href="/page/{{ i }}">{{ i }}</a>{% endif %}
+  {% endfor %}
+  {% if page < pages %}<a class="btn" href="/page/{{ page + 1 }}">Вперёд <i class="ri-arrow-right-line"></i></a>{% endif %}
+</nav>
+{% endblock %}

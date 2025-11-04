@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>{{ SITE_TITLE }}{% if SITE_TAGLINE %} — {{ SITE_TAGLINE }}{% endif %}</title>
+  <meta name="description" content="{{ SITE_TAGLINE }}"/>
+
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+  <link rel="stylesheet" href="/static/themes/clean/style.css" />
+  <script defer src="/static/themes/clean/theme.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/"><i class="ri-quill-pen-line"></i> {{ SITE_TITLE }}</a>
+      {% if SITE_TAGLINE %}<span class="muted hide-sm">{{ SITE_TAGLINE }}</span>{% endif %}
+      <nav class="nav">
+        <a href="/"><i class="ri-home-4-line"></i> Главная</a>
+        <a href="/search"><i class="ri-search-line"></i> Поиск</a>
+        <a href="/rss.xml"><i class="ri-rss-line"></i> RSS</a>
+        <button class="btn btn-ghost" id="themeToggle" title="Переключить тему">
+          <i class="ri-sun-line" id="themeIcon"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span class="muted">© {{ SITE_TITLE }}</span>
+      <span class="spacer"></span>
+      <a class="muted" href="/sitemap.xml"><i class="ri-sitemap-line"></i> Sitemap</a>
+    </div>
+  </footer>
+</body>
+</html>

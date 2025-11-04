@@ -1,0 +1,18 @@
+<!doctype html><html lang="ru" data-theme="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вход — Admin</title>
+<link rel="stylesheet" href="/static/themes/clean/style.css">
+<script defer src="/static/themes/clean/theme.js"></script>
+</head><body>
+  <main class="wrap main">
+    <article class="card" style="max-width:520px;margin:48px auto">
+      <h1 class="title">Вход в админку</h1>
+      {% if error %}<p style="color:#d00">{{ error }}</p>{% endif %}
+      <form method="post">
+        <p><input class="input" name="u" placeholder="Логин" required></p>
+        <p><input class="input" type="password" name="p" placeholder="Пароль" required></p>
+        <p><button class="btn" type="submit">Войти</button></p>
+      </form>
+    </article>
+  </main>
+</body></html>

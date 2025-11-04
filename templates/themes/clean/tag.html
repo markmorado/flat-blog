@@ -1,0 +1,17 @@
+{% extends "themes/clean/base.html" %}
+{% block content %}
+<h1 class="title"><i class="ri-price-tag-3-line"></i> #{{ tag }}</h1>
+<section class="list">
+  {% for p in posts %}
+  <article class="card">
+    <h2 class="title"><a href="{{ p.url() }}">{{ p.title }}</a></h2>
+    <div class="meta">
+      {% if p.date %}<time datetime="{{ p.date.date() }}"><i class="ri-calendar-line"></i> {{ p.date.date() }}</time>{% endif %}
+    </div>
+    <p class="excerpt">{{ p.summary }}</p>
+  </article>
+  {% else %}
+  <p class="muted">Нет постов с этим тегом.</p>
+  {% endfor %}
+</section>
+{% endblock %}

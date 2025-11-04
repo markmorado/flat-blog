@@ -1,0 +1,5 @@
+Flask==3.0.3
+Markdown==3.6
+PyYAML==6.0.2
+python-slugify==8.0.4
+gunicorn==22.0.0
